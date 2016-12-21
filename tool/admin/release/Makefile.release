@@ -93,11 +93,11 @@ RELEASE_BUILD = release/temp/build/qooxdoo-$(FRAMEWORK_VERSION)-build
 RELEASE_SDK = release/temp/sdk/qooxdoo-$(FRAMEWORK_VERSION)-sdk
 
 APPLICATIONS =
-APPLICATIONS_SCSS = mobileshowcase playground feedreader tutorial
-COMPONENTS = apiviewer testrunner server website
-COMPONENTS_SCSS = testrunner
+APPLICATIONS_SCSS =
+COMPONENTS =
+COMPONENTS_SCSS =
 FRAMEWORK_TARGETS = api test test-mobile dependencies
-TUTORIALS = mobiletweets tweets website
+TUTORIALS =
 
 WEBSITE_MODULES = core animation blocker cookie dataset dev io matchmedia messaging placeholder placement rest storage template textselection transform util ui
 WEBSITE_MODULES_ZIP = q-modules-$(FRAMEWORK_VERSION).js.zip
@@ -114,7 +114,7 @@ release: release-sdk
 
 release-sdk: distclean release-sdk-sans-clean
 release-sdk-sans-clean: release-sdk-info framework-api framework-dependencies resources-framework-build website-api website server showcase manual-build release-sdk-svn-collect release-sdk-archive
-release-sdk-framework: distclean release-sdk-info framework-api framework-dependencies release-sdk-svn-collect release-sdk-archive
+release-sdk-framework: distclean release-sdk-info framework-dependencies release-sdk-svn-collect release-sdk-archive
 
 
 release-sdk-info:
@@ -149,25 +149,25 @@ release-sdk-svn-collect:
 		$(CMD_MKDIR) $(RELEASE_SDK)/application/$$APPLICATION/source/script; \
 		$(CMD_SYNC_OFFLINE) ./tool/data/generator/needs_generation.js $(RELEASE_SDK)/application/$$APPLICATION/source/script/$$APPLICATION.js; \
 	done
-	@# showcase
-	@$(CMD_SYNC_OFFLINE) application/showcase/build/* $(RELEASE_SDK)/application/showcase/build
-	@# libs
-	@for COMPONENT in `echo server website`; do \
-		$(CMD_MKDIR) $(RELEASE_SDK)/component/standalone/$$COMPONENT/script/; \
-		for F in `echo component/standalone/$$COMPONENT/script/q*.js`; do \
-			L=`basename $$F`; \
-			if [[ ( "$$COMPONENT" == "website" ) && ( "$$L" =~ 'q-source' ) ]] ; then \
-				continue; \
-			fi; \
-			$(CMD_SYNC_OFFLINE) $$F $(RELEASE_SDK)/component/standalone/$$COMPONENT/script/$$L; \
-		done; \
-		if [ "$$COMPONENT" == "website" ]; then \
-			$(CMD_SYNC_OFFLINE) component/standalone/$$COMPONENT/api/* $(RELEASE_SDK)/component/standalone/$$COMPONENT/api; \
-		fi; \
-	done
+#	@# showcase
+#	@ $(CMD_SYNC_OFFLINE) application/showcase/build/* $(RELEASE_SDK)/application/showcase/build
+#	@# libs
+#	@for COMPONENT in `echo server website`; do \
+#		$(CMD_MKDIR) $(RELEASE_SDK)/component/standalone/$$COMPONENT/script/; \
+#		for F in `echo component/standalone/$$COMPONENT/script/q*.js`; do \
+#			L=`basename $$F`; \
+#			if [[ ( "$$COMPONENT" == "website" ) && ( "$$L" =~ 'q-source' ) ]] ; then \
+#				continue; \
+#			fi; \
+#			$(CMD_SYNC_OFFLINE) $$F $(RELEASE_SDK)/component/standalone/$$COMPONENT/script/$$L; \
+#		done; \
+#		if [ "$$COMPONENT" == "website" ]; then \
+#			$(CMD_SYNC_OFFLINE) component/standalone/$$COMPONENT/api/* $(RELEASE_SDK)/component/standalone/$$COMPONENT/api; \
+#		fi; \
+#	done
 
 	@echo "  * Synchronizing framework..."
-	@$(CMD_SYNC_OFFLINE) framework/api/* $(RELEASE_SDK)/framework/api
+#	@$(CMD_SYNC_OFFLINE) framework/api/* $(RELEASE_SDK)/framework/api
 	@$(CMD_MKDIR) $(RELEASE_SDK)/framework/source/script
 	@$(CMD_SYNC_OFFLINE) framework/source/script/dependencies.json $(RELEASE_SDK)/framework/source/script/dependencies.json
 
@@ -183,6 +183,9 @@ release-sdk-svn-collect:
 #	@$(CMD_MKDIR) $(RELEASE_SDK)/documentation/manual/
 #	@$(CMD_SYNC_OFFLINE) documentation/manual/build/html/* $(RELEASE_SDK)/documentation/manual/
 #	@$(CMD_SYNC_OFFLINE) documentation/manual/build/latex/qooxdoo.pdf $(RELEASE_SDK)/documentation/manual/
+	@rm -rf $(RELEASE_SDK)/application
+	@rm -rf $(RELEASE_SDK)/component
+	@rm -rf $(RELEASE_SDK)/documentation
 
 
 
