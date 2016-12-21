@@ -94,7 +94,7 @@ RELEASE_SDK = release/temp/sdk/qooxdoo-$(FRAMEWORK_VERSION)-sdk
 
 APPLICATIONS =
 APPLICATIONS_SCSS =
-COMPONENTS =
+COMPONENTS = apiviewer testrunner
 COMPONENTS_SCSS =
 FRAMEWORK_TARGETS = api test test-mobile dependencies
 TUTORIALS =
@@ -183,9 +183,6 @@ release-sdk-svn-collect:
 #	@$(CMD_MKDIR) $(RELEASE_SDK)/documentation/manual/
 #	@$(CMD_SYNC_OFFLINE) documentation/manual/build/html/* $(RELEASE_SDK)/documentation/manual/
 #	@$(CMD_SYNC_OFFLINE) documentation/manual/build/latex/qooxdoo.pdf $(RELEASE_SDK)/documentation/manual/
-	@rm -rf $(RELEASE_SDK)/application
-	@rm -rf $(RELEASE_SDK)/component
-	@rm -rf $(RELEASE_SDK)/documentation
 
 
 
