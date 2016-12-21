@@ -62,7 +62,7 @@ q.Class.define("qx.tool.Cache",
      * Set this to an unique value (e.g. commit hash prefix)
      * when existing caches need clearing.
      */
-    CACHE_REVISION: 0x1292407,
+    CACHE_REVISION: 0x0688e15,
 
     /**
      * Holds cache revision.
