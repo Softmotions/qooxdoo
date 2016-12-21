@@ -92,7 +92,7 @@ CMD_SYNC_BACKUP_WWW = $(CMD_NICE) rsync --recursive --verbose
 RELEASE_BUILD = release/temp/build/qooxdoo-$(FRAMEWORK_VERSION)-build
 RELEASE_SDK = release/temp/sdk/qooxdoo-$(FRAMEWORK_VERSION)-sdk
 
-APPLICATIONS = websitewidgetbrowser tutorial todo feedreader mobileshowcase playground showcase widgetbrowser github demobrowser
+APPLICATIONS =
 APPLICATIONS_SCSS = mobileshowcase playground feedreader tutorial
 COMPONENTS = apiviewer testrunner server website
 COMPONENTS_SCSS = testrunner
@@ -114,6 +114,7 @@ release: release-sdk
 
 release-sdk: distclean release-sdk-sans-clean
 release-sdk-sans-clean: release-sdk-info framework-api framework-dependencies resources-framework-build website-api website server showcase manual-build release-sdk-svn-collect release-sdk-archive
+release-sdk-framework: distclean release-sdk-info framework-api framework-dependencies release-sdk-svn-collect release-sdk-archive
 
 
 release-sdk-info:
@@ -176,12 +177,12 @@ release-sdk-svn-collect:
 	@echo "  * Switching to Unix line endings..."
 	@$(CMD_FIND) $(RELEASE_SDK) $(FILES_TEXT) -print0 $(CMD_ANY2UNIX)
 
-	@echo "  * Synchronizing documentation..."
-	@$(CMD_REMOVE) $(RELEASE_SDK)/documentation/manual/
-	@$(CMD_REMOVE) $(RELEASE_SDK)/documentation/tech_manual/
-	@$(CMD_MKDIR) $(RELEASE_SDK)/documentation/manual/
-	@$(CMD_SYNC_OFFLINE) documentation/manual/build/html/* $(RELEASE_SDK)/documentation/manual/
-	@$(CMD_SYNC_OFFLINE) documentation/manual/build/latex/qooxdoo.pdf $(RELEASE_SDK)/documentation/manual/
+#	@echo "  * Synchronizing documentation..."
+#	@$(CMD_REMOVE) $(RELEASE_SDK)/documentation/manual/
+#	@$(CMD_REMOVE) $(RELEASE_SDK)/documentation/tech_manual/
+#	@$(CMD_MKDIR) $(RELEASE_SDK)/documentation/manual/
+#	@$(CMD_SYNC_OFFLINE) documentation/manual/build/html/* $(RELEASE_SDK)/documentation/manual/
+#	@$(CMD_SYNC_OFFLINE) documentation/manual/build/latex/qooxdoo.pdf $(RELEASE_SDK)/documentation/manual/
 
 
 
